@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BlazorE.Models.Others
+namespace BlazorE.Models.Locations
 {
     public class Region
     {

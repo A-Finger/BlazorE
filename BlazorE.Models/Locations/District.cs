@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BlazorE.Models.Others
+namespace BlazorE.Models.Locations
 {
     public class District
     {
