@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorE.Catalog", "BlazorE.Catalog\BlazorE.Catalog.csproj", "{EB303E70-CCDB-467C-92B0-9AD92ED8FB8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorE.Catalog", "BlazorE.Catalog\BlazorE.Catalog.csproj", "{EB303E70-CCDB-467C-92B0-9AD92ED8FB8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorE.Models", "BlazorE.Models\BlazorE.Models.csproj", "{6BCFB6F8-C984-4F46-BC8E-73254BDC5D40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorE.Models", "BlazorE.Models\BlazorE.Models.csproj", "{6BCFB6F8-C984-4F46-BC8E-73254BDC5D40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorE.Services", "BlazorE.Services\BlazorE.Services.csproj", "{C0B8CA47-FA28-48B2-B0D7-C3BBB5F5FE9E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{6BCFB6F8-C984-4F46-BC8E-73254BDC5D40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BCFB6F8-C984-4F46-BC8E-73254BDC5D40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BCFB6F8-C984-4F46-BC8E-73254BDC5D40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0B8CA47-FA28-48B2-B0D7-C3BBB5F5FE9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0B8CA47-FA28-48B2-B0D7-C3BBB5F5FE9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0B8CA47-FA28-48B2-B0D7-C3BBB5F5FE9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0B8CA47-FA28-48B2-B0D7-C3BBB5F5FE9E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

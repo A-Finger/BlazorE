@@ -3,11 +3,11 @@ using BlazorE.Models.Stores;
 
 namespace BlazorE.Models.Others
 {
-    public class Status
+    public class Format
     {
         public int Id { get; set; }
-        [Required, MaxLength(50)]
-        public string StatusOf { get; set; } = null!;
+        [Required, MaxLength(30)]
+        public string Name { get; set; } = null!;
 
         public IEnumerable<Store> Stores { get; set; } = null!;
     }
