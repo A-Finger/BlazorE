@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using BlazorE.Models.Stores;
 
-namespace BlazorE.Models.Locations
+namespace BlazorE.Models.Others
 {
     public class LocationType
     {

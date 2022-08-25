@@ -14,12 +14,12 @@ namespace BlazorE.Services.DbAccess
         public DbSet<Region> Regions { get; set; } = null!;
         public DbSet<District> Districts { get; set; } = null!;
         public DbSet<City> Cities { get; set; } = null!;
-        public DbSet<LocationType> LocationTypes { get; set; } = null!;
         #endregion
 
         #region Folder Others
         public DbSet<DataType> DataTypes { get; set; } = null!;
         public DbSet<Format> Formats { get; set; } = null!;
+        public DbSet<LocationType> LocationTypes { get; set; } = null!;
         public DbSet<RetailBrand> RetailBrands { get; set; } = null!;
         public DbSet<RetailType> RetailTypes { get; set; } = null!;
         public DbSet<Status> Statuses { get; set; } = null!;
