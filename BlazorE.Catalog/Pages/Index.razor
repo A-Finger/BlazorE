@@ -1,9 +1,99 @@
 ﻿@page "/"
+@inject ILocation Location
 
 <PageTitle>Index</PageTitle>
+<div class="row p-2">
+	<div class="col">
+		<select class="form-select form-select-sm" @onchange="SelectedRegion">
+			<option selected>Оберіть область...</option>
+			@foreach (var item in regions)
+			{
+				<option value="@item.Id">@item.RegionName</option>
+			}
+		</select>
+	</div>
+	<div class="col">
+		<select class="form-select form-select-sm" disabled="@IsDisabled" @onchange="SelectedDisrict">
+			<option selected>Оберіть район...</option>
+			@foreach (var item in districts)
+			{
+				<option value="@item.Id">@item.DistrictName</option>
+			}
+		</select>
+	</div>
+	<div class="col"></div>
+</div>
 
-<h1>Hello, world!</h1>
+<table class="table table-sm table-hover">
+	<thead>
+		<tr>
+			<th scope="col">ID</th>
+			<th scope="col">Місто</th>
+			<th scope="col">Населення</th>
+			<th scope="col">Широта</th>
+			<th scope="col">Довгота</th>
+		</tr>
+	</thead>
+	<tbody>
 
-Welcome to your new app.
+		@foreach (var item in cities)
+		{
+			<tr>
+				<th scope="row">@item.Id</th>
+				<td>@item.CityName</td>
+				<td>@item.Population.ToString("### ### ###")</td>
+				<td>@item.Latitude</td>
+				<td>@item.Longitude</td>
+			</tr>
+		}
+	</tbody>
+</table>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+@code {
+	public bool IsDisabled { get; set; } = true;
+	private List<Region> regions = new();
+	private List<District> districts = new();
+	private List<City> cities = new();
+
+	protected override async Task OnInitializedAsync()
+	{
+		regions = await Location.GetAllRegions();
+	}
+
+	async Task SelectedRegion(ChangeEventArgs e)
+	{
+		await Task.Run(() =>
+		{
+			if (e.Value is not null)
+			{
+				if (Int32.TryParse(e.Value.ToString(), out int id))
+				{
+					districts = Location.GetAllDistrict().Result.Where(x => x.RegionId == id).ToList();
+					IsDisabled = false;
+				}
+				else
+				{
+					IsDisabled = true;
+				}
+			}
+		});
+	}
+
+	async Task SelectedDisrict(ChangeEventArgs e)
+	{
+		await Task.Run(() =>
+		{
+			if (e.Value is not null)
+			{
+				if (Int32.TryParse(e.Value.ToString(), out int id))
+				{
+					cities = Location.GetAllCities().Result.Where(x => x.DistrictId == id).ToList();
+				}
+				else
+				{
+					cities = new();
+				}
+			}
+		});
+	}
+}
