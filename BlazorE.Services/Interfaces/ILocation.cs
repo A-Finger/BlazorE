@@ -9,8 +9,8 @@ namespace BlazorE.Services.Interfaces
 {
     public interface ILocation
     {
-        Task<List<District>> GetAllDistrict();
-        Task<List<Region>> GetAllRegions();
-        Task<List<City>> GetAllCities();
+        Task<List<District>> GetAllDistrictAsync();
+        Task<List<Region>> GetAllRegionsAsync();
+        Task<List<City>> GetAllCitiesAsync();
     }
 }

@@ -57,7 +57,7 @@
 
 	protected override async Task OnInitializedAsync()
 	{
-		regions = await Location.GetAllRegions();
+		regions = await Location.GetAllRegionsAsync();
 	}
 
 	async Task SelectedRegion(ChangeEventArgs e)
@@ -68,7 +68,7 @@
 			{
 				if (Int32.TryParse(e.Value.ToString(), out int id))
 				{
-					districts = Location.GetAllDistrict().Result.Where(x => x.RegionId == id).ToList();
+					districts = Location.GetAllDistrictAsync().Result.Where(x => x.RegionId == id).ToList();
 					IsDisabled = false;
 				}
 				else
@@ -87,7 +87,7 @@
 			{
 				if (Int32.TryParse(e.Value.ToString(), out int id))
 				{
-					cities = Location.GetAllCities().Result.Where(x => x.DistrictId == id).ToList();
+					cities = Location.GetAllCitiesAsync().Result.Where(x => x.DistrictId == id).ToList();
 				}
 				else
 				{
