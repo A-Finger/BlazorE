@@ -9,11 +9,26 @@ namespace BlazorE.Models.Locations
         [Required, MaxLength(50)]
         public string CityName { get; set; } = null!;
         public int Population { get; set; }
-        public double Longitude { get; set; }
-        public double Latitude { get; set; }
-        public double DistrictId { get; set; }
+        public int LocalityId { get; set; }
+        public double? Longitude { get; set; }
+        public double? Latitude { get; set; }
+        public int DistrictId { get; set; }
 
         [ForeignKey(nameof(DistrictId))]
         public District District { get; set; } = null!;
+        [ForeignKey(nameof(LocalityId))]
+        public Locality TypeOfLocality { get; set; } = null!;
+
+        public City() { }
+        public City(int id, string cityName, int population,int localityId, double? latitude, double? longitude, int districtId)
+        {
+            Id = id;
+            CityName = cityName;
+            Population = population;
+            LocalityId = localityId;
+            Longitude = longitude;
+            Latitude = latitude;
+            DistrictId = districtId;
+        }
     }
 }

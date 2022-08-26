@@ -14,6 +14,7 @@ namespace BlazorE.Services.DbAccess
         public DbSet<Region> Regions { get; set; } = null!;
         public DbSet<District> Districts { get; set; } = null!;
         public DbSet<City> Cities { get; set; } = null!;
+        public DbSet<Locality> Localities { get; set; } = null!;
         #endregion
 
         #region Folder Others
