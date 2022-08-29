@@ -1,4 +1,5 @@
 using BlazorE.Catalog.Data;
+using BlazorE.Services.Classes;
 using BlazorE.Services.Interfaces;
 using BlazorE.Services.Mocks;
 using Microsoft.AspNetCore.Components;
@@ -17,6 +18,7 @@ namespace BlazorE.Catalog
             builder.Services.AddServerSideBlazor();
             builder.Services.AddSingleton<WeatherForecastService>();
             builder.Services.AddScoped<ILocation, MockLoaction>();
+            builder.Services.AddScoped<IStateService, StateService>();
 
             var app = builder.Build();
 

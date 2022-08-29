@@ -1,23 +1,40 @@
 ﻿@page "/"
+@implements IDisposable
 @inject ILocation Location
+@inject IStateService StateService
 
 <PageTitle>Index</PageTitle>
 <div class="row p-2">
 	<div class="col">
 		<select class="form-select form-select-sm" @onchange="SelectedRegion">
-			<option selected>Оберіть область...</option>
-			@foreach (var item in regions)
+			@if (StateService.Regions is null)
 			{
-				<option value="@item.Id">@item.RegionName</option>
+				<option selected>Завантаження...</option>
+			}
+			else
+			{
+				<option selected>Оберіть область...</option>
+				@foreach (var item in StateService.Regions)
+				{
+					<option value="@item.Id">@item.RegionName</option>
+				}
 			}
 		</select>
 	</div>
 	<div class="col">
 		<select class="form-select form-select-sm" disabled="@IsDisabled" @onchange="SelectedDisrict">
-			<option selected>Оберіть район...</option>
-			@foreach (var item in districts)
+			@if (StateService.Districts is null)
 			{
-				<option value="@item.Id">@item.DistrictName</option>
+				<option selected>Завантаження...</option>
+			}
+			else
+			{
+				<option selected>Оберіть район...</option>
+				@foreach (var item in StateService.Districts)
+				{
+					<option value="@item.Id">@item.DistrictName</option>
+
+				}
 			}
 		</select>
 	</div>
@@ -35,29 +52,31 @@
 		</tr>
 	</thead>
 	<tbody>
-
-		@foreach (var item in cities)
+		@if (StateService.Cities is not null)
 		{
-			<tr>
-				<th scope="row">@item.Id</th>
-				<td>@item.CityName</td>
-				<td>@item.Population.ToString("### ### ###")</td>
-				<td>@item.Latitude</td>
-				<td>@item.Longitude</td>
-			</tr>
+			@foreach (var item in StateService.Cities)
+			{
+				<tr>
+					<th scope="row">@item.Id</th>
+					<td>@item.CityName</td>
+					<td>@item.Population.ToString("### ### ###")</td>
+					<td>@item.Latitude</td>
+					<td>@item.Longitude</td>
+				</tr>
+			}
+
 		}
 	</tbody>
 </table>
 
 @code {
 	public bool IsDisabled { get; set; } = true;
-	private List<Region> regions = new();
-	private List<District> districts = new();
-	private List<City> cities = new();
 
 	protected override async Task OnInitializedAsync()
 	{
-		regions = await Location.GetAllRegionsAsync();
+		StateService.Regions = await Location.GetAllRegionsAsync();
+		StateService.OnChange += StateHasChanged;
+
 	}
 
 	async Task SelectedRegion(ChangeEventArgs e)
@@ -68,7 +87,9 @@
 			{
 				if (Int32.TryParse(e.Value.ToString(), out int id))
 				{
-					districts = Location.GetAllDistrictAsync().Result.Where(x => x.RegionId == id).ToList();
+
+					var dist = Location.GetAllDistrictAsync().Result.Where(x => x.RegionId == id).ToList();
+					InvokeAsync(() => StateService.Districts = dist);
 					IsDisabled = false;
 				}
 				else
@@ -87,13 +108,18 @@
 			{
 				if (Int32.TryParse(e.Value.ToString(), out int id))
 				{
-					cities = Location.GetAllCitiesAsync().Result.Where(x => x.DistrictId == id).ToList();
+					var cit = Location.GetAllCitiesAsync().Result.Where(x => x.DistrictId == id).ToList();
+					InvokeAsync(() => StateService.Cities = cit);
 				}
 				else
 				{
-					cities = new();
+					InvokeAsync(() => StateService.Cities = new());
 				}
 			}
 		});
+	}
+	public void Dispose()
+	{
+		StateService.OnChange -= StateHasChanged;
 	}
 }
