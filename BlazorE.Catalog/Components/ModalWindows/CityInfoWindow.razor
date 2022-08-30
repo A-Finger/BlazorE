@@ -1,0 +1,53 @@
+﻿@inject IStateService ss
+
+@*@if(IsDisplayOn)
+{*@
+	<div class="modal-backdrop show" />
+
+	<div class="modal fade show" id="exampleModal" tabindex="-1" role="dialog"
+	 aria-labelledby="exampleModal" aria-hidden="true" style="display: block">
+
+		<div class="modal-dialog modal-dialog-centered" role="document">
+
+			<div class="modal-content">
+				<div class=modal-header>
+					<h5 class=modal-title>@*@ss.City.CityName*@</h5>
+				<button @onclick="CloseWindow" type="button" class="btn-close" />
+				</div>
+				<div class=modal-body>
+					<div class="row">
+						<div class="col">Область:</div>
+						<div class="col">@*@ss.Region.RegionName*@</div>
+					</div>
+					<div class="row">
+						<div class="col">Населення області:</div>
+						<div class="col">@*@ss.Region.Population*@</div>
+					</div>
+					<div class="row">
+						<div class="col">Район:</div>
+						<div class="col">@*@ss.District.DistrictName*@</div>
+					</div>
+					<div class="row">
+						<div class="col">Населення району:</div>
+						<div class="col">@*@ss.District.Population*@</div>
+					</div>
+				</div>
+				<div class=modal-footer>
+				<button @onclick="CloseWindow" type="button" class="btn btn-sm btn-primary">Cancel</button>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+@*}*@
+
+@code {
+	[Parameter]
+	public EventCallback OnClose { get; set; }
+
+	private Task CloseWindow(){
+		return OnClose.InvokeAsync();
+	}
+
+}

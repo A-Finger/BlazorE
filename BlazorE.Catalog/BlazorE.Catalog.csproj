@@ -10,8 +10,4 @@
     <ProjectReference Include="..\BlazorE.Services\BlazorE.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Components\ModalWindows\" />
-  </ItemGroup>
-
 </Project>

@@ -10,6 +10,11 @@ namespace BlazorE.Services.Classes
 {
     public class StateService : IStateService
     {
+        private Region _region = null!;
+        private District _district = null!;
+        private City _city = null!;
+        private Locality _locality = null!;
+
         private List<Region> _regions = null!;
         private List<District> _districts = null!;
         private List<City> _cities = null!;
@@ -25,7 +30,8 @@ namespace BlazorE.Services.Classes
                 NotifyStateChanged();
             }
         }
-        public List<District> Districts {
+        public List<District> Districts
+        {
             get => _districts;
             set
             {
@@ -33,7 +39,8 @@ namespace BlazorE.Services.Classes
                 NotifyStateChanged();
             }
         }
-        public List<City> Cities {
+        public List<City> Cities
+        {
             get => _cities;
             set
             {
@@ -47,6 +54,43 @@ namespace BlazorE.Services.Classes
             set
             {
                 _localities = value;
+                NotifyStateChanged();
+            }
+        }
+
+        public Region Region
+        {
+            get => _region;
+            set
+            {
+                _region = value;
+                NotifyStateChanged();
+            }
+        }
+        public District District
+        {
+            get => _district;
+            set
+            {
+                _district = value;
+                NotifyStateChanged();
+            }
+        }
+        public City City
+        {
+            get => _city;
+            set
+            {
+                _city = value;
+                NotifyStateChanged();
+            }
+        }
+        public Locality Locality
+        {
+            get => _locality;
+            set
+            {
+                _locality = value;
                 NotifyStateChanged();
             }
         }

@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using BlazorE.Catalog.Components.ModalWindows
 @implements IDisposable
 @inject ILocation Location
 @inject IStateService StateService
@@ -56,7 +57,7 @@
 		{
 			@foreach (var item in StateService.Cities)
 			{
-				<tr>
+				<tr @onclick="GetCityInfo">
 					<th scope="row">@item.Id</th>
 					<td>@item.CityName</td>
 					<td>@item.Population.ToString("### ### ###")</td>
@@ -69,8 +70,13 @@
 	</tbody>
 </table>
 
+@if (IsCityWindow)
+{
+	<CityInfoWindow OnClose="(CloseCityInfo)"></CityInfoWindow>
+}
 @code {
-	public bool IsDisabled { get; set; } = true;
+	private bool IsDisabled { get; set; } = true;
+	private bool IsCityWindow { get; set; } = false;
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -118,6 +124,18 @@
 			}
 		});
 	}
+
+	private void GetCityInfo()
+	{
+		IsCityWindow = true;
+		StateHasChanged();
+	}
+	private void CloseCityInfo()
+	{
+		IsCityWindow = false;
+		StateHasChanged();
+	}
+
 	public void Dispose()
 	{
 		StateService.OnChange -= StateHasChanged;
