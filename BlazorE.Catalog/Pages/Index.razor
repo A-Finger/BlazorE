@@ -57,7 +57,7 @@
 		{
 			@foreach (var item in StateService.Cities)
 			{
-				<tr @onclick="GetCityInfo">
+				<tr @onclick="() => OpenCityInfo(item)">
 					<th scope="row">@item.Id</th>
 					<td>@item.CityName</td>
 					<td>@item.Population.ToString("### ### ###")</td>
@@ -125,8 +125,9 @@
 		});
 	}
 
-	private void GetCityInfo()
+	private void OpenCityInfo(City city)
 	{
+		GetCityInfo(city);
 		IsCityWindow = true;
 		StateHasChanged();
 	}
@@ -134,6 +135,13 @@
 	{
 		IsCityWindow = false;
 		StateHasChanged();
+	}
+
+	private void GetCityInfo(City city)
+	{
+		StateService.City = city;
+		StateService.District = StateService.Districts.Find(x => x.Id == city.DistrictId)!;
+		StateService.Region = StateService.Regions.Find(x => x.Id == StateService.District.RegionId)!;
 	}
 
 	public void Dispose()
