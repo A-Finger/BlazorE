@@ -18,14 +18,15 @@ namespace BlazorE.Models.Locations
         public IEnumerable<City> Cities { get; set; } = null!;
 
         public District() { }
-        public District(int id, string districtName, int population, double? latitude, double? longitude, int regionId)
+        public District(int id, string districtName, int population, double? latitude, double? longitude, Region region)
         {
             Id = id;
             DistrictName = districtName;
             Population = population;
             Latitude = latitude;
             Longitude = longitude;
-            RegionId = regionId;
+            RegionId = region.Id;
+            Region = region;
         }
     }
 }

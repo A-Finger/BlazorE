@@ -20,7 +20,7 @@ namespace BlazorE.Models.Locations
         public Locality TypeOfLocality { get; set; } = null!;
 
         public City() { }
-        public City(int id, string cityName, int population,int localityId, double? latitude, double? longitude, int districtId)
+        public City(int id, string cityName, int population,int localityId, double? latitude, double? longitude, District district, Locality typeOfLocality)
         {
             Id = id;
             CityName = cityName;
@@ -28,7 +28,10 @@ namespace BlazorE.Models.Locations
             LocalityId = localityId;
             Longitude = longitude;
             Latitude = latitude;
-            DistrictId = districtId;
+            DistrictId = district.Id;
+            District = district;
+            LocalityId = typeOfLocality.Id;
+            TypeOfLocality = typeOfLocality;
         }
     }
 }
