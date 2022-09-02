@@ -3,7 +3,6 @@
 @inject ILocation Location
 @inject IStateService StateService
 
-<PageTitle>Index</PageTitle>
 <div class="row p-2">
 	<div class="col">
 		<select class="form-select form-select-sm" @onchange="SelectedRegion">
@@ -40,20 +39,20 @@
 	</div>
 	<div class="col"></div>
 </div>
+@if (StateService.Cities is not null && StateService.Cities.Count != 0)
+{
+	<table class="table table-sm table-hover">
+		<thead>
+			<tr>
+				<th scope="col">ID</th>
+				<th scope="col">Місто</th>
+				<th scope="col">Населення</th>
+				<th scope="col">Широта</th>
+				<th scope="col">Довгота</th>
+			</tr>
+		</thead>
+		<tbody>
 
-<table class="table table-sm table-hover">
-	<thead>
-		<tr>
-			<th scope="col">ID</th>
-			<th scope="col">Місто</th>
-			<th scope="col">Населення</th>
-			<th scope="col">Широта</th>
-			<th scope="col">Довгота</th>
-		</tr>
-	</thead>
-	<tbody>
-		@if (StateService.Cities is not null)
-		{
 			@foreach (var item in StateService.Cities)
 			{
 				<tr @onclick="() => OpenCityInfo(item)">
@@ -65,10 +64,10 @@
 				</tr>
 			}
 
-		}
-	</tbody>
-</table>
 
+		</tbody>
+	</table>
+}
 @if (IsCityWindow)
 {
 	<CityInfoWindow OnClose="(CloseCityInfo)"></CityInfoWindow>
@@ -100,6 +99,7 @@
 				else
 				{
 					IsDisabled = true;
+					InvokeAsync(() => StateService.Cities = new());
 				}
 			}
 		});
