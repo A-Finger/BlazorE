@@ -70,7 +70,7 @@
 }
 @if (IsCityWindow)
 {
-	<CityInfoWindow OnClose="(CloseCityInfo)"></CityInfoWindow>
+	<CityInfoWindow OnClose="CloseCityInfo"></CityInfoWindow>
 }
 @code {
 	private bool IsDisabled { get; set; } = true;
@@ -139,8 +139,8 @@
 	private void GetCityInfo(City city)
 	{
 		StateService.City = city;
-		StateService.District = StateService.Districts.Find(x => x.Id == city.DistrictId)!;
-		StateService.Region = StateService.Regions.Find(x => x.Id == StateService.District.RegionId)!;
+		StateService.District = city.District;
+		StateService.Region = city.District.Region;
 	}
 
 	public void Dispose()
