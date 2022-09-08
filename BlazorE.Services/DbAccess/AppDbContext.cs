@@ -2,6 +2,7 @@
 using BlazorE.Models.Others;
 using BlazorE.Models.Sales;
 using BlazorE.Models.Stores;
+using BlazorE.Models.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlazorE.Services.DbAccess
@@ -33,6 +34,13 @@ namespace BlazorE.Services.DbAccess
 
         #region Folder Stores
         public DbSet<Store> Stores { get; set; } = null!;
+        #endregion
+
+        #region Folder User
+        public DbSet<Department> Departments { get; set; } = null!;
+        public DbSet<UserRole> UserRoles { get; set; } = null!;
+        public DbSet<User> Users { get; set; } = null!;
+        public DbSet<JobTitle> JobTitles { get; set; } = null!;
         #endregion
     }
 }

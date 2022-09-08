@@ -74,12 +74,10 @@ namespace BlazorE.Services.Mocks
         {
             return await Task.Run(() => _cities);
         }
-
         public async Task<List<District>> GetAllDistrictAsync()
         {
             return await Task.Run(() => _districts);
         }
-
         public async Task<List<Region>> GetAllRegionsAsync()
         {
             return await Task.Run(() => _regions);
