@@ -1,8 +1,11 @@
+using BlazorE.Catalog.Authentication;
 using BlazorE.Catalog.Data;
 using BlazorE.Services.Classes;
 using BlazorE.Services.Interfaces;
 using BlazorE.Services.Mocks;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorE.Catalog
@@ -16,6 +19,8 @@ namespace BlazorE.Catalog
             // Add services to the container.
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
+            builder.Services.AddScoped<ProtectedSessionStorage>();
+            builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
             builder.Services.AddSingleton<WeatherForecastService>();
             builder.Services.AddScoped<ILocation, MockLoaction>();
             builder.Services.AddScoped<IStateService, StateService>();

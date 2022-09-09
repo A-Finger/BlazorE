@@ -1,11 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BlazorE.Models.Users
 {
+    [Index(nameof(Login), IsUnique = true)]
     public class User
     {
         public int Id { get; set; }
+        [Required, MaxLength(30)]
+        public string Login { get; set; } = null!;
         [Required, MaxLength(50)]
         public string FirstName { get; set; } = null!;
         [MaxLength(50)]
@@ -27,7 +33,28 @@ namespace BlazorE.Models.Users
         public User Leader { get; set; } = null!;
         [ForeignKey(nameof(UserRoleId))]
         public UserRole UserRole { get; set; } = null!;
-
+        [ForeignKey(nameof(JobTitleId))]
+        public JobTitle JobTitle { get; set; } = null!;
         public IEnumerable<User> Users { get; set; } = null!;
+
+        public User() { }
+        public User(int id, string login, string firstName, string? midleName, string lastName, string? phone, string? email, string password, bool lockConfirmed, User leader, UserRole userRole, JobTitle jobTitle)
+        {
+            Id = id;
+            Login = login;
+            FirstName = firstName;
+            MidleName = midleName;
+            LastName = lastName;
+            Phone = phone;
+            Email = email;
+            Password = password;
+            LockConfirmed = lockConfirmed;
+            JobTitleId = jobTitle.Id;
+            UserRoleId = userRole.Id;
+            LeaderId = leader.Id;
+            Leader = leader;
+            UserRole = userRole;
+            JobTitle = jobTitle;
+        }
     }
 }
