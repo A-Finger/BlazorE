@@ -1,20 +1,66 @@
-﻿@inherits LayoutComponentBase
+﻿@using BlazorE.Catalog.Authentication
+@using BlazorE.Catalog.Components.ModalWindows
+@inherits LayoutComponentBase
+@inject IUserAccess userAccess
+@inject IJSRuntime js
+@inject AuthenticationStateProvider authStateProvider
 
 <PageTitle>BlazorE.Catalog</PageTitle>
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+	<div class="sidebar">
+		<NavMenu />
+	</div>
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-            <a href="/login" target="_blank">Login</a>
-        </div>
+	<main>
+		<div class="top-row px-4">
+			<a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+			<AuthorizeView Roles="Admin,User">
+				<Authorized>
+					<a href="#" @onclick="LogOut" target="_self">Log out</a>
+				</Authorized>
+				<NotAuthorized>
+					<a href="#" @onclick="OpenLoginWindow" target="_self">Log in</a>
+				</NotAuthorized>
+			</AuthorizeView>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
+		</div>
+
+		<article class="content px-4">
+			@Body
+		</article>
+	</main>
 </div>
+
+@if (IsLoginWindow)
+{
+	<LoginWindow OnLogin="OnLoginWindow" OnClose="CloseLoginWindow" />
+}
+
+@code {
+	private bool IsLoginWindow { get; set; } = false;
+
+	private void CloseLoginWindow()
+	{
+		IsLoginWindow = false;
+		StateHasChanged();
+	}
+
+	private void OnLoginWindow(bool state)
+	{
+		IsLoginWindow = state;
+		StateHasChanged();
+	}
+
+	private void OpenLoginWindow()
+	{
+		IsLoginWindow = true;
+		StateHasChanged();
+	}
+
+	private async Task LogOut(){
+		var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
+		await customAuthStateProvider.UpdateAuthenticationStateAsync(null);
+		StateHasChanged();
+	}
+}

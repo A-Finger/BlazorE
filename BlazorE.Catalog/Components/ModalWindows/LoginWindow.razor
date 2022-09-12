@@ -1,0 +1,82 @@
+﻿@using BlazorE.Catalog.Authentication
+@inject IUserAccess userAccess
+@inject IJSRuntime js
+@inject AuthenticationStateProvider authStateProvider
+
+<div class="modal-backdrop show" />
+
+<div class="modal fade show" id="LoginModalWindow" tabindex="-1" role="dialog"
+	 aria-labelledby="LoginModalWindow" aria-hidden="true" style="display: block">
+
+	<div class="modal-dialog modal-dialog-centered" role="dialog">
+
+		<div class="modal-content">
+			<div class="modal-header alert-success">
+				<h5 class=modal-title>Login</h5>
+				<button @onclick="CloseWindow" type="button" class="btn-close" />
+			</div>
+			<div class=modal-body>
+				<form>
+					<!-- Email input -->
+					<div class="form-outline mb-4">
+						<input type="text" id="form2Example1" class="form-control" @bind="model.Login" />
+						<label class="form-label" for="form2Example1">Login</label>
+					</div>
+
+					<!-- Password input -->
+					<div class="form-outline mb-4">
+						<input type="password" id="form2Example2" class="form-control" @bind-value="model.Password" />
+						<label class="form-label" for="form2Example2">Password</label>
+					</div>
+				</form>
+			</div>
+			<div class=modal-footer>
+				<button @onclick="Authenticate" type="button" class="btn btn-sm btn-primary">Login</button>
+				<button @onclick="CloseWindow" type="button" class="btn btn-sm btn-primary">Close</button>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+
+@code {
+	[Parameter]
+	public EventCallback OnClose { get; set; }
+	[Parameter]
+	public EventCallback<bool> OnLogin { get; set; }
+
+	private Task CloseWindow()
+	{
+		return OnClose.InvokeAsync();
+	}
+
+	private class Model
+	{
+		public string Login { get; set; } = null!;
+		public string Password { get; set; } = null!;
+	}
+
+	private Model model = new();
+
+	private async Task Authenticate()
+	{
+		var userAccount = await userAccess.GetByLoginAsync(model.Login);
+		if (userAccount is null || userAccount.Password != model.Password)
+		{
+			await js.InvokeVoidAsync("alert", "Невірний Login або Password");
+			return;
+		}
+
+		var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
+		await customAuthStateProvider.UpdateAuthenticationStateAsync(new UserSession
+			{
+				UserName = userAccount.FirstName,
+				Role = userAccount.UserRole.Value
+			});
+		await OnLogin.InvokeAsync(false);
+		//StateHasChanged();
+	}
+
+}
