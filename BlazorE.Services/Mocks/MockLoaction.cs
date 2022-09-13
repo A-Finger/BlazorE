@@ -39,9 +39,9 @@ namespace BlazorE.Services.Mocks
             #region Add entites to list of localities
             _localities = new List<Locality>()
             {
-                new Locality() { Id = 1, TypeOfLocality = "місто" },
-                new Locality() { Id = 2, TypeOfLocality = "смт" },
-                new Locality() { Id = 3, TypeOfLocality = "село" }
+                new Locality() { Id = 1, Name = "місто" },
+                new Locality() { Id = 2, Name = "смт" },
+                new Locality() { Id = 3, Name = "село" }
             };
             #endregion
             #region Add entites to list of cities
@@ -82,7 +82,7 @@ namespace BlazorE.Services.Mocks
         {
             return await Task.Run(() => _regions);
         }
-        public async Task<List<Locality>> GetAllLocality()
+        public async Task<List<Locality>> GetAllLocalityAsync()
         {
             return await Task.Run(() => _localities);
         }

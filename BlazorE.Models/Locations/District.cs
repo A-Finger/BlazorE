@@ -7,7 +7,7 @@ namespace BlazorE.Models.Locations
     {
         public int Id { get; set; }
         [Required, MaxLength(50)]
-        public string DistrictName { get; set; } = null!;
+        public string Name { get; set; } = null!;
         public int Population { get; set; }
         public double? Longitude { get; set; }
         public double? Latitude { get; set; }
@@ -21,7 +21,7 @@ namespace BlazorE.Models.Locations
         public District(int id, string districtName, int population, double? latitude, double? longitude, Region region)
         {
             Id = id;
-            DistrictName = districtName;
+            Name = districtName;
             Population = population;
             Latitude = latitude;
             Longitude = longitude;

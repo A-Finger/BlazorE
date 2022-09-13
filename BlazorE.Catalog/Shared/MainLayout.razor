@@ -15,12 +15,12 @@
 	<main>
 		<div class="top-row px-4">
 			<a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-			<AuthorizeView Roles="Admin,User">
+			<AuthorizeView>
 				<Authorized>
-					<a href="#" @onclick="LogOut" target="_self">Log out</a>
+					<a href="" @onclick="LogOut" target="_self">Log out</a>
 				</Authorized>
 				<NotAuthorized>
-					<a href="#" @onclick="OpenLoginWindow" target="_self">Log in</a>
+					<a href="" @onclick="OpenLoginWindow" target="_self">Log in</a>
 				</NotAuthorized>
 			</AuthorizeView>
 
@@ -43,24 +43,20 @@
 	private void CloseLoginWindow()
 	{
 		IsLoginWindow = false;
-		StateHasChanged();
 	}
 
 	private void OnLoginWindow(bool state)
 	{
 		IsLoginWindow = state;
-		StateHasChanged();
 	}
 
 	private void OpenLoginWindow()
 	{
 		IsLoginWindow = true;
-		StateHasChanged();
 	}
 
 	private async Task LogOut(){
 		var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
-		await customAuthStateProvider.UpdateAuthenticationStateAsync(null);
-		StateHasChanged();
+		await customAuthStateProvider.UpdateAuthenticationStateAsync(null!);
 	}
 }

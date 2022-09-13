@@ -9,21 +9,21 @@
 
 		<div class="modal-content">
 			<div class="modal-header alert-success">
-				<h5 class=modal-title>@ss.City.CityName</h5>
+				<h5 class=modal-title>@ss.City.Name</h5>
 				<button @onclick="CloseWindow" type="button" class="btn-close" />
 			</div>
 			<div class=modal-body>
 				<div class="row">
-					<div class="col-3 text-end">Область:</div>
-					<div class="col">@ss.City.District.Region.RegionName (@ss.City.District.Region.Population.ToString("### ### ###"))</div>
+					<div class="col-3 text-end">область:</div>
+					<div class="col">@ss.City.District.Region.Name (@ss.City.District.Region.Population.ToString("### ### ###"))</div>
 				</div>
 				<div class="row">
-					<div class="col-3 text-end">Район:</div>
-					<div class="col">@ss.City.District.DistrictName (@ss.City.District.Population.ToString("### ### ###"))</div>
+					<div class="col-3 text-end">район:</div>
+					<div class="col">@ss.City.District.Name (@ss.City.District.Population.ToString("### ### ###"))</div>
 				</div>
 				<div class="row">
-					<div class="col-3 text-end">Місто:</div>
-					<div class="col">@ss.City.CityName (@ss.City.Population.ToString("### ### ###"))</div>
+					<div class="col-3 text-end">@ss.City.Locality.Name:</div>
+					<div class="col">@ss.City.Name (@ss.City.Population.ToString("### ### ###"))</div>
 				</div>
 			</div>
 			<div class=modal-footer>

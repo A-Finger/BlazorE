@@ -7,7 +7,7 @@ namespace BlazorE.Models.Locations
     {
         public int Id { get; set; }
         [Required, MaxLength(50)]
-        public string CityName { get; set; } = null!;
+        public string Name { get; set; } = null!;
         public int Population { get; set; }
         public int LocalityId { get; set; }
         public double? Longitude { get; set; }
@@ -17,13 +17,13 @@ namespace BlazorE.Models.Locations
         [ForeignKey(nameof(DistrictId))]
         public District District { get; set; } = null!;
         [ForeignKey(nameof(LocalityId))]
-        public Locality TypeOfLocality { get; set; } = null!;
+        public Locality Locality { get; set; } = null!;
 
         public City() { }
         public City(int id, string cityName, int population,int localityId, double? latitude, double? longitude, District district, Locality typeOfLocality)
         {
             Id = id;
-            CityName = cityName;
+            Name = cityName;
             Population = population;
             LocalityId = localityId;
             Longitude = longitude;
@@ -31,7 +31,7 @@ namespace BlazorE.Models.Locations
             DistrictId = district.Id;
             District = district;
             LocalityId = typeOfLocality.Id;
-            TypeOfLocality = typeOfLocality;
+            Locality = typeOfLocality;
         }
     }
 }

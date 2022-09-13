@@ -9,7 +9,7 @@ namespace BlazorE.Models.Locations
     public class Locality
     {
         public int Id { get; set; }
-        public string TypeOfLocality { get; set; } = null!;
+        public string Name { get; set; } = null!;
 
         public IEnumerable<City> Cities { get; set; } = null!;
     }
