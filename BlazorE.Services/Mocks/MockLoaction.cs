@@ -47,27 +47,26 @@ namespace BlazorE.Services.Mocks
             #region Add entites to list of cities
             _cities = new List<City>
             {
-                new City(1, "Вінниця", 370707, 1, 49.2347128, 28.399594, _districts[0],_localities[0]),
-                new City(2, "Жмеринка", 34353, 1, 49.0347082, 28.0653579, _districts[1],_localities[0]),
-                new City(4, "Бар", 15775, 1, 49.0773188, 27.6074541, _districts[2],_localities[0]),
-                new City(5, "Копайгород", 1243, 2, 48.8544896, 27.7661602, _districts[2],_localities[1]),
+                new City(1, "Вінниця", 370707, 49.2347128, 28.399594, _districts[0],_localities[0]),
+                new City(2, "Жмеринка", 34353, 49.0347082, 28.0653579, _districts[1],_localities[0]),
+                new City(4, "Бар", 15775, 49.0773188, 27.6074541, _districts[2],_localities[0]),
+                new City(5, "Копайгород", 1243, 48.8544896, 27.7661602, _districts[2],_localities[1]),
 
-                new City(50, "Луцьк", 217315, 1, 50.73977, 25.263965, _districts[3],_localities[0]),
-                new City(51, "Устилуг", 2096, 1, 50.8598762, 24.1395284, _districts[4],_localities[0]),
-                new City(52, "Берестечко", 1694, 1, 50.3618529, 25.0934278, _districts[5],_localities[0]),
-                new City(53, "Горохів", 9053, 1, 50.4987121, 24.7456097, _districts[5],_localities[0]),
-                new City(54, "Мар'янівка", 2736, 2, 50.45399, 24.7852098, _districts[5],_localities[1]),
-                new City(55, "Сенкевичівка", 1257, 2, 50.5290912, 25.0207398, _districts[5],_localities[1]),
+                new City(50, "Луцьк", 217315, 50.73977, 25.263965, _districts[3],_localities[0]),
+                new City(51, "Устилуг", 2096, 50.8598762, 24.1395284, _districts[4],_localities[0]),
+                new City(52, "Берестечко", 1694, 50.3618529, 25.0934278, _districts[5],_localities[0]),
+                new City(53, "Горохів", 9053, 50.4987121, 24.7456097, _districts[5],_localities[0]),
+                new City(54, "Мар'янівка", 2736,50.45399, 24.7852098, _districts[5],_localities[1]),
+                new City(55, "Сенкевичівка", 1257, 50.5290912, 25.0207398, _districts[5],_localities[1]),
 
-                new City(96, "Дніпро", 990724, 1, 48.4622135, 34.8602725, _districts[6],_localities[0]),
-                new City(97, "Авіаторське", 2496, 2, 48.3679517, 35.0725533, _districts[6],_localities[1]),
-                new City(98, "Підгородне", 19526, 1, 48.5753292, 35.0626666, _districts[7],_localities[0]),
-                new City(99, "Обухівка", 9224, 2, 48.5441211, 34.8392666, _districts[7],_localities[0]),
-                new City(100, "Слобожанське", 13889, 2, 48.5442264, 35.0402961, _districts[7],_localities[1]),
-                new City(101, "Жовті Води", 44320, 1, 48.3662787, 33.4673882, _districts[8],_localities[0])
+                new City(96, "Дніпро", 990724, 48.4622135, 34.8602725, _districts[6],_localities[0]),
+                new City(97, "Авіаторське", 2496, 48.3679517, 35.0725533, _districts[6],_localities[1]),
+                new City(98, "Підгородне", 19526, 48.5753292, 35.0626666, _districts[7],_localities[0]),
+                new City(99, "Обухівка", 9224, 48.5441211, 34.8392666, _districts[7],_localities[1]),
+                new City(100, "Слобожанське", 13889, 48.5442264, 35.0402961, _districts[7],_localities[1]),
+                new City(101, "Жовті Води", 44320, 48.3662787, 33.4673882, _districts[8],_localities[0])
             };
             #endregion
-
         }
 
         public async Task<List<City>> GetAllCitiesAsync()

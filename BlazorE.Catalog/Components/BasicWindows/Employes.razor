@@ -1,0 +1,37 @@
+﻿@using BlazorE.Models.Users
+@inject IUserAccess userAccess
+
+<ul>
+	@if (_users is not null)
+	{
+		@foreach (var boss in _users.Where(x => x.LeaderId == 0))
+		{
+			<li>
+				@boss.Id @boss.FirstName  @boss.LastName
+				<ul>
+					@foreach (var lead in _users.Where(x => x.LeaderId == boss.Id))
+					{
+						<li>
+							@lead.Id @lead.FirstName @lead.LastName
+							<ul>
+								@foreach (var emp in _users.Where(x => x.LeaderId == lead.Id))
+								{
+									<li>@emp.Id @emp.FirstName @emp.LastName</li>
+								}
+							</ul>
+						</li>
+					}
+				</ul>
+			</li>
+		}
+	}
+</ul>
+
+@code {
+	private IEnumerable<User> _users = null!;
+
+	protected override async Task OnInitializedAsync()
+	{
+		_users = await userAccess.GetAllUsersAsync();
+	}
+}

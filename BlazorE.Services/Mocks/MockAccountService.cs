@@ -46,55 +46,55 @@ namespace BlazorE.Services.Mocks
             };
             #region Відділ продажу
             //index #1 _users[1]
-            _users.Add(new User(2, "Admin1", "Іван", "Іванович", "Іванов",
+            _users.Add(new User(2, "Admin1", "Іван1", "Іванович", "Іванов",
                 "+380503200002", "admin@admin.com", "admin", false,
                _users[0], userRoles[1], jobTitles[1]));
             //index #2 _users[2]
-            _users.Add(new User(3, "User1", "Петро", "Петрович", "Петров",
+            _users.Add(new User(3, "User1", "Петро1", "Петрович", "Петров",
                 "+380503200003", "user@user.com", "user", false,
                _users[1], userRoles[2], jobTitles[2]));
             //index #3 _users[3]
-            _users.Add(new User(4, "User2", "Антон", "Антонович", "Антоненко",
+            _users.Add(new User(4, "User2", "Антон1", "Антонович", "Антоненко",
                 "+380503200004", "user@user.com", "user", false,
                _users[1], userRoles[2], jobTitles[2]));
             //index #4 _users[4]
-            _users.Add(new User(5, "User3", "Андрій", "Андрійович", "Андрійченко",
+            _users.Add(new User(5, "User3", "Андрій1", "Андрійович", "Андрійченко",
                 "+380503200005", "user@user.com", "user", false,
                _users[1], userRoles[2], jobTitles[3]));
             #endregion
             #region Відділ розвитку
             //index #5 _users[5]
-            _users.Add(new User(6, "Admin2", "Іван", "Іванович", "Іванов",
+            _users.Add(new User(6, "Admin2", "Іван2", "Іванович", "Іванов",
                 "+380503200006", "admin@admin.com", "admin", false,
                _users[0], userRoles[1], jobTitles[4]));
             //index #6 _users[6]
-            _users.Add(new User(7, "User4", "Петро", "Петрович", "Петров",
+            _users.Add(new User(7, "User4", "Петро2", "Петрович", "Петров",
                 "+380503200007", "user@user.com", "user", false,
                _users[5], userRoles[2], jobTitles[5]));
             //index #7 _users[7]
-            _users.Add(new User(8, "User5", "Антон", "Антонович", "Антоненко",
+            _users.Add(new User(8, "User5", "Антон2", "Антонович", "Антоненко",
                 "+380503200008", "user@user.com", "user", false,
                _users[5], userRoles[2], jobTitles[5]));
             //index #8 _users[8]
-            _users.Add(new User(9, "User6", "Андрій", "Андрійович", "Андрійченко",
+            _users.Add(new User(9, "User6", "Андрій2", "Андрійович", "Андрійченко",
                 "+380503200009", "user@user.com", "user", false,
                _users[5], userRoles[2], jobTitles[6]));
             #endregion
             #region Відділ з аналітики
             //index #9 _users[9]
-            _users.Add(new User(10, "Admin3", "Іван", "Іванович", "Іванов",
+            _users.Add(new User(10, "Admin3", "Іван3", "Іванович", "Іванов",
                 "+380503200006", "admin@admin.com", "admin", false,
                _users[0], userRoles[1], jobTitles[7]));
             //index #10 _users[10]
-            _users.Add(new User(11, "User7", "Петро", "Петрович", "Петров",
+            _users.Add(new User(11, "User7", "Петро3", "Петрович", "Петров",
                 "+380503200007", "user@user.com", "user", false,
                _users[9], userRoles[2], jobTitles[8]));
             //index #11 _users[11]
-            _users.Add(new User(12, "User8", "Антон", "Антонович", "Антоненко",
+            _users.Add(new User(12, "User8", "Антон3", "Антонович", "Антоненко",
                 "+380503200008", "user@user.com", "user", false,
                _users[9], userRoles[2], jobTitles[8]));
             //index #12 _users[12]
-            _users.Add(new User(13, "User9", "Андрій", "Андрійович", "Андрійченко",
+            _users.Add(new User(13, "User9", "Андрій3", "Андрійович", "Андрійченко",
                 "+380503200009", "user@user.com", "user", false,
                _users[9], userRoles[2], jobTitles[9]));
             #endregion
@@ -102,12 +102,14 @@ namespace BlazorE.Services.Mocks
 
         public async Task<User?> GetByLoginAsync(string login)
         {
-            return await Task.Run(() => GetByLogin(login));
+            return await Task.Run(
+                () => _users.FirstOrDefault(x => x.Login == login)
+            );
         }
 
-        private User? GetByLogin(string login)
+        public async Task<IEnumerable<User>> GetAllUsersAsync()
         {
-            return _users.FirstOrDefault(x => x.Login == login);
+            return await Task.Run(() => _users);
         }
     }
 }

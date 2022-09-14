@@ -20,12 +20,11 @@ namespace BlazorE.Models.Locations
         public Locality Locality { get; set; } = null!;
 
         public City() { }
-        public City(int id, string cityName, int population,int localityId, double? latitude, double? longitude, District district, Locality typeOfLocality)
+        public City(int id, string cityName, int population, double? latitude, double? longitude, District district, Locality typeOfLocality)
         {
             Id = id;
             Name = cityName;
             Population = population;
-            LocalityId = localityId;
             Longitude = longitude;
             Latitude = latitude;
             DistrictId = district.Id;

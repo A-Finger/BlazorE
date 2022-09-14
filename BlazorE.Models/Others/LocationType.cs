@@ -7,7 +7,7 @@ namespace BlazorE.Models.Others
     {
         public int Id { get; set; }
         [Required, MaxLength(50)]
-        public string TypeOfLocation { get; set; } = null!;
+        public string Name { get; set; } = null!;
 
         public IEnumerable<Store> Stores { get; set; } = null!;
     }
