@@ -1,0 +1,32 @@
+﻿@using BlazorE.Models.Users
+
+@if (Users is null)
+{
+	<span>Loading...</span>
+}
+else
+{
+	<ul>
+		@foreach (var emp in Users.Where(x => x.LeaderId == LeaderId))
+		{
+			@if (Users.FirstOrDefault(y => y.LeaderId == emp.Id) is null)
+			{
+				<li>
+					@emp.Id @emp.FirstName
+				</li>
+			}
+			else
+			{
+				<li>@emp.Id @emp.FirstName</li>
+				<EmployeeComponent Users="Users" LeaderId="emp.Id" />
+			}
+		}
+	</ul>
+}
+
+@code {
+	[Parameter]
+	public IEnumerable<User> Users { get; set; }
+	[Parameter]
+	public int LeaderId { get; set; }
+}

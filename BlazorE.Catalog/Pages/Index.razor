@@ -1,4 +1,6 @@
 ﻿@page "/"
+@using BlazorE.Models.Users
+@inject IUserAccess userAccess
 
 <AuthorizeView>
 	<Authorized>
@@ -14,9 +16,11 @@
 				<LocationWindow />
 			</div>
 			<div class="tab-pane fade" id="nav-employes" role="tabpanel" aria-labelledby="nav-profile-tab">
-				<Employes />
+				<EmployeeComponent Users="Users" LeaderId="0" />
 			</div>
-			<div class="tab-pane fade" id="test2" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+			<div class="tab-pane fade" id="test2" role="tabpanel" aria-labelledby="nav-contact-tab">
+			...
+			</div>
 		</div>
 	</Authorized>
 	<NotAuthorized>
@@ -26,4 +30,10 @@
 
 
 @code {
+	private IEnumerable<User> Users { get; set; } = null!;
+
+	protected override async Task OnInitializedAsync()
+	{
+		Users = await userAccess.GetAllUsersAsync();
+	}
 }
