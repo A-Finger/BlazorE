@@ -1,9 +1,4 @@
-﻿@using BlazorE.Catalog.Authentication
-@using BlazorE.Catalog.Components.ModalWindows
-@inherits LayoutComponentBase
-@inject IUserAccess userAccess
-@inject IJSRuntime js
-@inject AuthenticationStateProvider authStateProvider
+﻿@inherits LayoutComponentBase
 
 <PageTitle>BlazorE.Catalog</PageTitle>
 
@@ -14,49 +9,10 @@
 
 	<main>
 		<div class="top-row px-4">
-			<a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-			<AuthorizeView>
-				<Authorized>
-					<a href="" @onclick="LogOut" target="_self">Log out</a>
-				</Authorized>
-				<NotAuthorized>
-					<a href="" @onclick="OpenLoginWindow" target="_self">Log in</a>
-				</NotAuthorized>
-			</AuthorizeView>
-
+			@*<a href="https://docs.microsoft.com/aspnet/" target="_blank">About ASP.Net</a>*@
 		</div>
-
 		<article class="content px-4">
 			@Body
 		</article>
 	</main>
 </div>
-
-@if (IsLoginWindow)
-{
-	<LoginWindow OnLogin="OnLoginWindow" OnClose="CloseLoginWindow" />
-}
-
-@code {
-	private bool IsLoginWindow { get; set; } = false;
-
-	private void CloseLoginWindow()
-	{
-		IsLoginWindow = false;
-	}
-
-	private void OnLoginWindow(bool state)
-	{
-		IsLoginWindow = state;
-	}
-
-	private void OpenLoginWindow()
-	{
-		IsLoginWindow = true;
-	}
-
-	private async Task LogOut(){
-		var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
-		await customAuthStateProvider.UpdateAuthenticationStateAsync(null!);
-	}
-}

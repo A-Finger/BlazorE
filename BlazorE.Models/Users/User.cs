@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics.CodeAnalysis;
 
 namespace BlazorE.Models.Users
 {
@@ -24,7 +22,8 @@ namespace BlazorE.Models.Users
         public string? Email { get; set; }
         [Required, MaxLength(16)]
         public string Password { get; set; } = null!;
-        public bool LockConfirmed { get; set; }
+        public bool IsLockConfirmed { get; set; }
+        public bool IsFired { get; set; }
         public int JobTitleId { get; set; }
         public int UserRoleId { get; set; }
         public int LeaderId { get; set; }
@@ -48,7 +47,7 @@ namespace BlazorE.Models.Users
             Phone = phone;
             Email = email;
             Password = password;
-            LockConfirmed = lockConfirmed;
+            IsLockConfirmed = lockConfirmed;
             JobTitleId = jobTitle.Id;
             UserRoleId = userRole.Id;
             LeaderId = leader.Id;
