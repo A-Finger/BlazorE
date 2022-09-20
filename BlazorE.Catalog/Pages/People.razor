@@ -1,0 +1,28 @@
+﻿@page "/people"
+
+<RadzenDataGrid Data="@items">
+    <Columns>
+        <RadzenDataGridColumn TItem="DataItem" Property="Name" Title="Name"/>
+        <RadzenDataGridColumn TItem="DataItem" Property="Value" Title="Value" />
+    </Columns>
+</RadzenDataGrid>
+
+@code {
+    class DataItem
+    {
+        public string Name { get; set; }
+        public int Value { get; set; }
+    }
+
+    IEnumerable<DataItem> items;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Run(() =>
+        items = new List<DataItem>()
+            {
+        new DataItem { Name = "Jane Doe", Value = 1},
+        new DataItem { Name = "John Doe", Value = 2},
+            });
+    }
+}
